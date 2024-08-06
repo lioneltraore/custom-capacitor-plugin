@@ -1,5 +1,7 @@
 package com.cubixroot.plugins.customplugin;
 
+import android.content.Context;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -17,6 +19,20 @@ public class CubixRootPluginPlugin extends Plugin {
 
         JSObject ret = new JSObject();
         ret.put("value", implementation.echo(value));
+        call.resolve(ret);
+    }
+
+    @PluginMethod
+    public void testPluginMethod(PluginCall call) {
+//        String value = call.getString("msg");
+//
+//        JSObject ret = new JSObject();
+//        ret.put("value", implementation.echo(value));
+//        call.resolve(ret);
+        String value = call.getString("msg");
+        Context context=this.getActivity().getApplicationContext();
+        JSObject ret = new JSObject();
+        ret.put("value", implementation.printReceipt(value,context));
         call.resolve(ret);
     }
 }
